@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question.jsx';
 
-export default function QuestionList({ id, questions, ratings, updateTotals }) {
+export default function QuestionList({ id, questions, ratings, updateMaster }) {
   const [subQScore, setSubQScore] = useState({
-    0: 0, //first subQ row, based on index
+    0: 0, //first subQ row, based on index. Ex: 0 for Q1 is row for "Crave sweets and/or..."
     1: 0,
     2: 0,
     3: 0,
@@ -15,22 +15,28 @@ export default function QuestionList({ id, questions, ratings, updateTotals }) {
     score: subQTotal
   });
 
+  // whenever users select values for each subQuestion,
+  // adjust the total for the overall Question
+  useEffect(() => {
+    updateSubQTotal();
+  }, [subQScore])
+
+  // Whenever we get a new total for the whole question,
+  // update what the summary looks like
+  // example: { question_no: 1, score: ___ }
   useEffect(() => {
     setQSummary((prev) => (
       {...prev, score: subQTotal}
     ));
   }, [subQTotal])
 
+  // every time our summary for this question changes,
+  // let's update the master tracker for all the questions
   useEffect(() => {
-    if (subQTotal > 10) {
-      // update the running totals for all questions
-      updateTotals('high', null, [qSummary])
-    }
+    updateMaster(id, qSummary);
   }, [qSummary])
 
-  useEffect(() => {
-    updateSubQTotal();
-  }, [subQScore])
+
 
   function updateSubQScore(key, value) {
     setSubQScore((prev) => (
@@ -47,7 +53,7 @@ export default function QuestionList({ id, questions, ratings, updateTotals }) {
   }
 
   return (
-    <form className="quiz-form">
+    <div className="quiz-form">
       <h3>{`Question ${id}`}</h3>
       <div className="rating-row">
         <div className="empty-300px-wide" />
@@ -56,6 +62,6 @@ export default function QuestionList({ id, questions, ratings, updateTotals }) {
       <div className="all-subQs">
         {questions.map((subQ, i) => (<Question question={subQ} qId={id} updateSubQScore={updateSubQScore} row={i} key={i}/>))}
       </div>
-    </form>
+    </div>
   )
 }

@@ -1,70 +1,108 @@
 import React, { useContext, useState } from 'react';
 import { ChangeViewContext } from '../App.jsx';
+import axios from 'axios';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 import '../css/takeQuiz.css';
 
 import QuestionList from './QuestionList.jsx';
 
 // allQuestions is [ {id: 1, questions: [(sub questions)], ratings:[(never, sometimes, etc)]}, {...} ]}
-export default function TakeQuiz({ allQuestions }) {
+export default function TakeQuiz({ allQuestions, updateResults }) {
   const changeView = useContext(ChangeViewContext);
-  // this is what will eventually be sent back to the server
-  const [runningTotals, setRunningTotals] = useState({
-    provide: {
-      score: 0,
-      level: ''
-    },
-    protect: {
-      score: 0,
-      level: ''
-    },
-    high: [],
-    watch: []
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [errMsg, setErrMsg] = useState('');
+
+  const [questionsMaster, setQuestionsMaster] = useState({
+    1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}
   });
 
-  function updateTotals(key, key2, newFactor) {
+  function updateMaster(question, newValue) {
+    setQuestionsMaster((prev) => (
+      {...prev, [question]: newValue}
+    ))
+  }
 
-    // if no key2 provided, we are pushing into either high or watch array
-    if (!key2) {
-      // make sure we don't duplicate the same question
-      const duplicate = {
-        isDupe: false,
-        index: 0
+  function submitForm(e) {
+    e.preventDefault();
+
+    if(!email) {
+      setErrMsg('An email is required to save your results');
+    } else {
+      setErrMsg('');
+      setLoading(true);
+      // this result array stays on the front end just for visualization as a graph
+      const results = Array.from(Object.values(questionsMaster));
+      updateResults(results);
+
+      // once the form button is submitted, we need to organize data from our master into a form the back end will like
+      const runningTotals = {
+        provide: {
+          score: 0,
+          level: 'acceptable'
+        },
+        protect: {
+          score: 0,
+          level: 'acceptable'
+        },
+        high: [],
+        watch: [],
+        results: results,
+        email: email
       }
-      for (let i = 0; i < runningTotals[key].length; i++) {
-        const currentQuestion = runningTotals[key][i].question_no;
-        if (currentQuestion === newFactor[0].question_no) {
-          // if we have a duplicate, just update it. Otherwise concat to our array
-          duplicate.isDupe = true;
-          duplicate.index = i;
+      for (var question in questionsMaster) {
+        const currentValue = questionsMaster[question];
+        if (question > 0 && question < 6) {
+          runningTotals.provide.score += currentValue.score;
+        }
+        if (question > 5) {
+          runningTotals.protect.score += currentValue.score;
+        }
+        if (currentValue.score > 10) {
+          runningTotals.high.push(currentValue)
+        }
+        if (currentValue.score > 5 && currentValue.score < 11) {
+          runningTotals.watch.push(currentValue);
         }
       }
-      if (duplicate.isDupe) {
-        setRunningTotals((prev) => (
-          {...prev, [key]: runningTotals[key][duplicate.index] = [newFactor[0]]}
-        ))
-      } else {
-        console.log('key', key);
-        console.log('runningtotals[key]', runningTotals[key]);
-        setRunningTotals((runningTotals) => (
-          {...runningTotals, [key]: runningTotals[key].concat(newFactor)}
-        ));
+      // check what level protect and provide are at based on their total
+      if (runningTotals.provide.score >= 45) {
+        runningTotals.provide.level = 'high';
       }
+      if (runningTotals.protect.score >= 27) {
+        runningTotals.protect.level = 'high';
+      }
+      console.log('FINAL FORM IS ', runningTotals);
     }
   }
 
-  console.log('running totals are ', runningTotals)
+  function goHome() {
+    window.location.reload(true);
+  }
 
   return (
     <div className="whole-page">
       <div className="go-back-bar">
-        <button onClick={(e) => changeView(e, 0)}>Home</button>
+        <button onClick={goHome}>Home</button>
       </div>
-      <div className="quiz-container">
+      <form className="quiz-container" onSubmit={submitForm}>
         <h1>Title for Quiz, Something good</h1>
         <p>Answer the following questions on a scale from 0(no/least/never) to 3(yes/most/frequently). Take your time and be honest with the answers; the more accurate you are, the better you will understand which systems are a priority for you.</p>
-        {allQuestions.map((question) => (<QuestionList id={question.id} questions={question.questions} ratings={question.ratings} updateTotals={updateTotals} key={question.id}/>))}
-      </div>
+        {allQuestions.map((question) => (<QuestionList id={question.id} questions={question.questions} ratings={question.ratings} updateMaster={updateMaster} key={question.id}/>))}
+        <div className="submission-btn">
+          <h3>Email: </h3><input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+          <button type="submit">Submit Quiz</button>
+          <div className="spinner">
+            <ClipLoader
+              color="#826AED"
+              loading={loading}
+              size={30}
+            />
+          </div>
+        </div>
+        {errMsg && <div className="error-msg">{errMsg}</div>}
+      </form>
     </div>
   )
 }
