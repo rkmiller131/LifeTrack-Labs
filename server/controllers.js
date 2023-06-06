@@ -73,3 +73,23 @@ exports.submitQuiz = (req, res) => {
   .catch((err) => console.log('QUERY ERROR ', err));
 
 };
+
+exports.getQuestions = (req, res) => {
+  pool.query(
+    `SELECT
+        id,
+        question_no,
+        (array_agg(array[q1, q2, q3, q4, q5])) AS questions,
+        ratings
+      FROM quizcontent
+      GROUP BY ratings, question_no, id
+      ORDER BY id;`,
+  )
+  .then((results) => {
+    // don't quite understand how to get rid of nexted array in pool query,
+    // so here is a sloppy fix:
+    results.rows.forEach((row) => row.questions = row.questions[0])
+    res.status(200).send(results.rows);
+  })
+  .catch((err) => res.status(500).send(err));
+};

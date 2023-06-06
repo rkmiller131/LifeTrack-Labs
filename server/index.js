@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get('/quiz', controllers.getQuestions);
 app.post('/quiz', controllers.submitQuiz);
 
 const port = process.env.PORT;
