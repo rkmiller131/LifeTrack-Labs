@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 import Home from './components/Home.jsx';
@@ -8,6 +8,16 @@ export const ChangeViewContext = React.createContext();
 
 export default function App() {
   const [currentView, setCurrentView] = useState(0);
+  const [allQuestions, setAllQuestions] = useState({});
+
+  useEffect(() => {
+    axios.get('/quiz')
+      .then((results) => {
+        console.log(results.data);
+        setAllQuestions(results.data);
+      })
+      .catch((err) => console.log('error fetching quiz', err));
+  }, []);
 
   function changeView(e, view) {
     e.preventDefault();
@@ -19,7 +29,7 @@ export default function App() {
       <ChangeViewContext.Provider value={changeView}>
         <div>Insert Sticky Nav Ribbon Here</div>
         { currentView === 0 && <Home /> }
-        { currentView === 1 && <TakeQuiz /> }
+        { currentView === 1 && <TakeQuiz allQuestions={allQuestions}/> }
         { currentView === 2 && <Confirmation /> }
         { currentView === 3 && <SeeResults /> }
       </ChangeViewContext.Provider>

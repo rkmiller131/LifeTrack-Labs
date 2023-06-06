@@ -1,0 +1,41 @@
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0 10%;
+}
+
+.quiz-container p {
+  width: 700px;
+}
+
+.quiz-form {
+  display: flex;
+  width: 700px;
+  flex-direction: column;
+}
+
+.rating-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.empty-300px-wide {
+  width: 300px;
+}
+
+.rating {
+  margin-left: 15px;
+}
+
+.subQ-container,
+.subQ {
+  display: flex;
+  justify-content: space-between;
+}
+
+.subQ {
+  flex-wrap: wrap;
+  width: 300px;
+}
