@@ -14,9 +14,11 @@ export default function Home({ updateResults, saveRationale }) {
       setErrorMsg('Email required');
     } else {
       setErrorMsg('');
-      axios.get('/results')
+      axios.get(`/results?email=${email}`)
         .then((results) => {
-          console.log(results.data);
+          updateResults(results.data.results);
+          saveRationale(results.data.response);
+          changeView(e, 3);
         })
         .catch((err) => {
           setErrorMsg('Email Not Found');

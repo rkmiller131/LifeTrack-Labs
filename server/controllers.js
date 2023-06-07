@@ -136,3 +136,21 @@ exports.getQuestions = (req, res) => {
   })
   .catch((err) => res.status(500).send(err));
 };
+
+exports.getResults = (req, res) => {
+  const { email } = req.query
+  pool.query(
+    `SELECT * FROM userinfo WHERE email = $1`,
+    [email],
+  )
+    .then((results) => {
+      if (results.rows[0] === undefined) {
+        res.status(409).json({error: 'Email not found'});
+      } else {
+        res.status(200).send(results.rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
