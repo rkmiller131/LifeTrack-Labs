@@ -35,3 +35,17 @@ CREATE TABLE relatedrationale (
 
 COPY relatedrationale FROM '/Users/rachel/Desktop/SoloWork/LifeTrack-Labs/server/database/relatedrationale.csv'
   DELIMITER ',' QUOTE '"' CSV HEADER;
+
+CREATE TABLE quizcontent (
+  id INT,
+  question_no VARCHAR(255),
+  q1 TEXT,
+  q2 TEXT,
+  q3 TEXT,
+  q4 TEXT,
+  q5 TEXT,
+  ratings TEXT[]
+);
+
+COPY quizcontent FROM '/Users/rachel/Desktop/SoloWork/LifeTrack-Labs/server/database/quizcontent.csv'
+  DELIMITER ',' QUOTE '"' CSV HEADER;
