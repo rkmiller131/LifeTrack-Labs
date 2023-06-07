@@ -1,0 +1,41 @@
+.whole-page-confirmation {
+  background: #BDBBB6;
+  width: 100%;
+  height: 95vh;
+  position: relative;
+}
+
+.confirmation-box {
+  background: #fff;
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  height: 500px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confirmation-box h2 {
+  margin: 75px 0 30px 0;
+}
+
+.confirmation-box p {
+  width: 400px;
+  text-align: center;
+}
+
+.confirmation-btn-container {
+  align-self: center;
+  padding: 50px;
+}
+
+.home-btn {
+  margin-right: 10px;
+}
+
+.results-btn {
+  margin-left: 10px;
+}
+

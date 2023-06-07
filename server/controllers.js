@@ -1,8 +1,39 @@
 const axios = require('axios');
 const pool = require('./database/db');
 
+exports.saveUserInfoToDb = (req, cb) => {
+  const { email, results, response } = req.body;
+  const resu = JSON.stringify(results);
+  const resp = JSON.stringify(response);
+
+  pool.query(
+    `SELECT * FROM userinfo WHERE email = '${email}';`
+  )
+    .then((data) => {
+      if (data.rows.length === 0) {
+        pool.query(
+          `INSERT INTO userinfo (email, results, response)
+          VALUES ($1, $2, $3)`,
+          [email, resu, resp],
+        )
+          .then(() => {console.log('user info inserted'); cb(null); })
+          .catch((err) => {console.log('error saving user info ', err); cb(err); });
+      } else {
+        pool.query(
+          `UPDATE userinfo SET results = $1, response = $2
+          WHERE email = $3`,
+          [resu, resp, email],
+        )
+          .then(() => {console.log('user info has been updated'); cb(null); })
+          .catch((err) => {console.log('error updating user information'); cb(err); });
+      }
+    })
+    .catch((err) => console.log(err));
+
+}
+
 exports.submitQuiz = (req, res) => {
-  const { provide, protect, high, watch } = req.body;
+  const { provide, protect, high, watch, email, results } = req.body;
 
   let category;
   if (provide.level === 'high' && protect.level === 'high') {
@@ -29,7 +60,6 @@ exports.submitQuiz = (req, res) => {
         .catch((err) => console.log('Error in selecting labs and placing in set ', err));
     })
   }
-  // before shipping labs as response, do Array.from(labs)
   (async () => {
     await buildLabList(high);
     await buildLabList(watch);
@@ -68,7 +98,20 @@ exports.submitQuiz = (req, res) => {
     return results.rows[0];
   })
   .then((response) => {
-    res.status(201).send(response);
+    const request = {
+      body: {
+        email,
+        results,
+        response
+      }
+    }
+    module.exports.saveUserInfoToDb(request, (err) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(201).send(response);
+      }
+    });
   })
   .catch((err) => console.log('QUERY ERROR ', err));
 

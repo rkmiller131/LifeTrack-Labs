@@ -8,7 +8,7 @@ import '../css/takeQuiz.css';
 import QuestionList from './QuestionList.jsx';
 
 // allQuestions is [ {id: 1, questions: [(sub questions)], ratings:[(never, sometimes, etc)]}, {...} ]}
-export default function TakeQuiz({ allQuestions, updateResults }) {
+export default function TakeQuiz({ allQuestions, updateResults, saveRationale }) {
   const changeView = useContext(ChangeViewContext);
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -73,7 +73,15 @@ export default function TakeQuiz({ allQuestions, updateResults }) {
       if (runningTotals.protect.score >= 27) {
         runningTotals.protect.level = 'high';
       }
-      console.log('FINAL FORM IS ', runningTotals);
+
+      axios.post('/quiz', runningTotals)
+        .then((res) => {
+          setLoading(false);
+          console.log(res.data);
+          saveRationale(res.data);
+          changeView(e, 2);
+        })
+        .catch((err) => console.log('ERROR saving quiz ', err));
     }
   }
 

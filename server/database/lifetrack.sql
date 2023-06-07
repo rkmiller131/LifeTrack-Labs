@@ -49,3 +49,10 @@ CREATE TABLE quizcontent (
 
 COPY quizcontent FROM '/Users/rachel/Desktop/SoloWork/LifeTrack-Labs/server/database/quizcontent.csv'
   DELIMITER ',' QUOTE '"' CSV HEADER;
+
+CREATE TABLE userinfo (
+  id serial PRIMARY KEY,
+  email VARCHAR(255),
+  results JSONB,
+  response JSONB
+);

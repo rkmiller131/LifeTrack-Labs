@@ -14,6 +14,7 @@ export default function RadioButtons({ label, qId, question, updateSubQScore, ro
       {label}
       <input
         type="radio"
+        id="form-radio"
         value={label}
         name={question}
         defaultChecked={label === selectedButton}
