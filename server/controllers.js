@@ -6,8 +6,6 @@ exports.saveUserInfoToDb = (req, cb) => {
   const resu = JSON.stringify(results);
   const resp = JSON.stringify(response);
 
-  console.log('result is ', resu);
-
   pool.query(
     `SELECT * FROM userinfo WHERE email = '${email}';`
   )
@@ -22,13 +20,13 @@ exports.saveUserInfoToDb = (req, cb) => {
           .catch((err) => {console.log('error saving user info ', err); cb(err); });
       } else {
         pool.query(
-          `UPDATE userinfo SET results = '${result}', response = '${respond}'
-          WHERE email = '${email}';`
+          `UPDATE userinfo SET results = $1, response = $2
+          WHERE email = $3`,
+          [resu, resp, email],
         )
           .then(() => {console.log('user info has been updated'); cb(null); })
           .catch((err) => {console.log('error updating user information'); cb(err); });
       }
-      console.log('DATA IS ', data.rows)
     })
     .catch((err) => console.log(err));
 
@@ -62,7 +60,6 @@ exports.submitQuiz = (req, res) => {
         .catch((err) => console.log('Error in selecting labs and placing in set ', err));
     })
   }
-  // before shipping labs as response, do Array.from(labs)
   (async () => {
     await buildLabList(high);
     await buildLabList(watch);

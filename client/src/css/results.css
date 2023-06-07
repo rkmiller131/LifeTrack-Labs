@@ -1,0 +1,58 @@
+.results {
+  box-sizing: border-box;
+  margin: 5% 15%;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col-provide,
+.col-protect {
+  height: 350px;
+  padding: 10px;
+}
+
+.col-provide {
+  flex-basis: 60%;
+  margin-right: 2%;
+
+}
+
+.col-protect {
+  flex-basis: 38%;
+}
+
+.summary-labs {
+  width: 100vw;
+}
+
+.col-summary {
+  flex-basis: 50%;
+  margin-right: 5%;
+}
+
+.col-summary h3 {
+  margin-top: 50px;
+}
+
+.col-labs {
+  flex-basis: 40%;
+}
+
+.col-labs h3 {
+  margin-top: 50px;
+}
+
+.individual-score h4 {
+  white-space: pre;
+  margin-right: 10px;
+  margin-top: -10px;
+}
+
+.individual-score p {
+  margin-bottom: 24px;
+}

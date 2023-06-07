@@ -1,3 +1,7 @@
+#form-radio {
+  accent-color: #0E1C36;
+}
+
 .quiz-container {
   display: flex;
   flex-direction: column;
@@ -16,9 +20,20 @@
   flex-direction: column;
 }
 
+.quiz-form h3 {
+  border: 2px solid #826AED;
+  color: #826AED;
+  border-radius: 8px;
+  width: 100px;
+  padding: 5px;
+  margin-bottom: 0;
+  margin-top: 30px;
+}
+
 .rating-row {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .empty-300px-wide {
@@ -33,6 +48,7 @@
 .subQ {
   display: flex;
   justify-content: space-between;
+  padding: 3px 5px;
 }
 
 .subQ {
@@ -42,7 +58,7 @@
 
 .submission-btn {
   display: flex;
-  margin: 50px 0;
+  margin: 50px 0 10px 0;
 }
 
 .submission-btn button {
@@ -66,4 +82,8 @@
   margin-left: 10px;
   display: flex;
   align-items: center;
+}
+
+.error-msg {
+  color: red;
 }
