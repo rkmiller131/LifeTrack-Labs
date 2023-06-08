@@ -1,0 +1,21 @@
+.manual-lab-container {
+  width: 400px;
+}
+
+.manual-lab-container form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.manual-lab-container h3 {
+  font-size: 16px;
+}
+
+.manual-lab-container input {
+  width: 100px;
+  height: 20px;
+}
+
+.input-container {
+  margin-right: 30px;
+}

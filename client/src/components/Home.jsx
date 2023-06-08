@@ -3,8 +3,12 @@ import axios from 'axios';
 import { ChangeViewContext } from '../App.jsx';
 import '../css/hero.css';
 
+import ManualLabs from './ManualLabs.jsx';
+
 export default function Home({ updateResults, saveRationale }) {
   const changeView = useContext(ChangeViewContext);
+  const [toggleManualLabs, setToggleManualLabs] = useState(false);
+  const [temporaryResults, setTemporaryResults] = useState('');
   const [email, setEmail] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -25,6 +29,14 @@ export default function Home({ updateResults, saveRationale }) {
           console.log('ERROR retrieving results ', err);
         })
     }
+  }
+
+  function manualLabEntry(form) {
+    axios.post('/labs', form)
+      .then((results) => {
+        setTemporaryResults(results.data);
+      })
+      .catch((err) => console.log(err));
   }
   return (
     <div className="whole-page">
@@ -62,7 +74,9 @@ export default function Home({ updateResults, saveRationale }) {
               </div>
               <div className="left-button-container">
                 <button type="button" className="upload-lab">Upload</button>
-                <button type="button" className="manual-lab">Enter Manually</button>
+                <button type="button" className="manual-lab" onClick={(e) => {e.preventDefault(); setToggleManualLabs(true)}}>Enter Manually</button>
+                {toggleManualLabs && <ManualLabs manualLabEntry={manualLabEntry}/>}
+                {temporaryResults && <div>{temporaryResults}</div>}
               </div>
             </div>
           </div>
