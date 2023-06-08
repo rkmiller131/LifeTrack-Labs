@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function RadioButtons({ label, qId, question, updateSubQScore, row }) {
+export default function RadioButtons({ label, question, updateSubQScore, row }) {
   const [selectedButton, setSelectedButton] = useState(-1);
 
   function handleButtonSelect(e) {

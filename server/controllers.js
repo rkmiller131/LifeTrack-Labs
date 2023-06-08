@@ -179,3 +179,16 @@ exports.evaluateLabs = (req, res) => {
   console.log(dbQuery);
   res.send(dbQuery);
 }
+
+exports.getOneQuestion = (req, res) => {
+  const question = req.query.question_no;
+  pool.query(
+    `SELECT
+      (array_agg(array[q1, q2, q3, q4, q5])) AS questions
+    FROM quizcontent WHERE id=${question}`,
+  )
+  .then((results) => {
+    results.rows.forEach((row) => row.questions = row.questions[0])
+    res.send(results.rows[0])
+  })
+}
