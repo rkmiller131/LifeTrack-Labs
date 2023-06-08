@@ -60,7 +60,7 @@ export default function QuestionList({ id, questions, ratings, updateMaster }) {
         {ratings.map((rating) => (<div className="rating">{rating}</div>))}
       </div>
       <div className="all-subQs">
-        {questions.map((subQ, i) => (<Question question={subQ} qId={id} updateSubQScore={updateSubQScore} row={i} key={i}/>))}
+        {questions.map((subQ, i) => (<Question question={subQ} updateSubQScore={updateSubQScore} row={i} key={i}/>))}
       </div>
     </div>
   )

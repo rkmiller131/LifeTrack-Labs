@@ -1,6 +1,9 @@
 const axios = require('axios');
 const pool = require('./database/db');
 
+const { glucoseDecisionPath } = require('./gluDecisionPath');
+const { glucoseDecisionTree } = require('./gluDecisionTree');
+
 exports.saveUserInfoToDb = (req, cb) => {
   const { email, results, response } = req.body;
   const resu = JSON.stringify(results);
@@ -136,3 +139,56 @@ exports.getQuestions = (req, res) => {
   })
   .catch((err) => res.status(500).send(err));
 };
+
+exports.getResults = (req, res) => {
+  const { email } = req.query
+  pool.query(
+    `SELECT * FROM userinfo WHERE email = $1`,
+    [email],
+  )
+    .then((results) => {
+      if (results.rows[0] === undefined) {
+        res.status(409).json({error: 'Email not found'});
+      } else {
+        res.status(200).send(results.rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+exports.evaluateLabs = (req, res) => {
+
+  Object.byString = function(obj, str) {
+    str = str.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+    str = str.replace(/^\./, '');           // strip a leading dot
+    var arr = str.split('.');
+    for (var i = 0, n = arr.length; i < n; ++i) {
+        var k = arr[i];
+        if (k in obj) {
+            obj = obj[k];
+        } else {
+            return;
+        }
+    }
+    return obj;
+  }
+  const pathing = glucoseDecisionPath(req.body);
+  const dbQuery = Object.byString(glucoseDecisionTree, pathing);
+  console.log(dbQuery);
+  res.send(dbQuery);
+}
+
+exports.getOneQuestion = (req, res) => {
+  const question = req.query.question_no;
+  pool.query(
+    `SELECT
+      (array_agg(array[q1, q2, q3, q4, q5])) AS questions
+    FROM quizcontent WHERE id=${question}`,
+  )
+  .then((results) => {
+    results.rows.forEach((row) => row.questions = row.questions[0])
+    res.send(results.rows[0])
+  })
+}

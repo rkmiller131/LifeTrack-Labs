@@ -11,9 +11,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/quiz', controllers.getQuestions);
+app.get('/question', controllers.getOneQuestion);
 app.post('/quiz', controllers.submitQuiz);
 
 app.get('/results', controllers.getResults);
+
+app.post('/labs', controllers.evaluateLabs);
 
 const port = process.env.PORT;
 app.listen(port, ()=> {
