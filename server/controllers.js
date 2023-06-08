@@ -1,6 +1,9 @@
 const axios = require('axios');
 const pool = require('./database/db');
 
+const { glucoseDecisionPath } = require('./gluDecisionPath');
+const { glucoseDecisionTree } = require('./gluDecisionTree');
+
 exports.saveUserInfoToDb = (req, cb) => {
   const { email, results, response } = req.body;
   const resu = JSON.stringify(results);
@@ -153,4 +156,26 @@ exports.getResults = (req, res) => {
     .catch((err) => {
       console.log(err);
     })
+}
+
+exports.evaluateLabs = (req, res) => {
+
+  Object.byString = function(obj, str) {
+    str = str.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
+    str = str.replace(/^\./, '');           // strip a leading dot
+    var arr = str.split('.');
+    for (var i = 0, n = arr.length; i < n; ++i) {
+        var k = arr[i];
+        if (k in obj) {
+            obj = obj[k];
+        } else {
+            return;
+        }
+    }
+    return obj;
+  }
+  const pathing = glucoseDecisionPath(req.body);
+  const dbQuery = Object.byString(glucoseDecisionTree, pathing);
+  console.log(dbQuery);
+  res.send(dbQuery);
 }

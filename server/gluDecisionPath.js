@@ -1,4 +1,4 @@
-function glucoseDecisionPath (obj) {
+exports.glucoseDecisionPath = (obj) => {
   const path = [];
   let glucose = '';
   let insulin = '';
@@ -80,5 +80,32 @@ function glucoseDecisionPath (obj) {
 
   path.push(biliggt);
 
+  if (obj.tag) {
+    if (obj.tag > 80) {
+      tag += 'tagProvided.high';
+    } else {
+      tag += 'tagProvided.normal';
+    }
+  } else {
+    tag += 'tagNotProvided';
+  }
+
+  path.push(tag);
+
+  // console.log(path.join('.'));
+  return path.join('.');
 
 }
+
+
+// const test = {
+//   id: 1,
+//   email: 'example@email.com',
+//   glucose: 107,
+//   insulin: 5.6,
+//   hba1c: 5.7,
+//   bilirubin: 0.5,
+//   ggt: 20,
+//   tag: 86
+// }
+// glucoseDecisionPath(test);

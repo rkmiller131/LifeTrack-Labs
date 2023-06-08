@@ -311,7 +311,7 @@
 //   }
 // };
 
-const glucoseDecisionTree = {
+exports.glucoseDecisionTree = {
   highGlucose: {
     insulinProvided: {
       ir: {
@@ -319,328 +319,328 @@ const glucoseDecisionTree = {
           diabetic: {
             bilirubinProvided: {
               ggtProvided: {
-                bothHigh: { 'END HERE WITH: IR, DIABETIC, OX DAMAGE CRITICAL'},
+                bothHigh: 'END HERE WITH: IR, DIABETIC, OX DAMAGE CRITICAL',
                 oneHigh: {
                   tagProvided: {
-                    high: { 'END HERE WITH: IR, DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS'},
-                    normal: { 'END HERE WITH: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'}
+                    high: 'END HERE WITH: IR, DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                    normal: 'END HERE WITH: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                   },
-                  tagNotProvided: {'END: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'}
+                  tagNotProvided: 'END: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
                 },
                 neitherHigh: {
                   tagProvided: {
-                    high: {'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ'},
-                    normal: {'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'}
+                    high: 'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ',
+                    normal: 'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'
                   },
-                  tagNotProvided: {'END: CLEAR SIGNS OF IR DIABETIC NO OX DMG YET RECOM LIPIDS'}
+                  tagNotProvided: 'END: CLEAR SIGNS OF IR DIABETIC NO OX DMG YET RECOM LIPIDS'
                 }
               },
               ggtNotProvided: {
                 tagProvided: {
-                  high: {},
-                  normal: {}
+                  high: 'END: CLEAR SIGNS OF IR DIABETIC SLIGHT OX DMG, ISS ENERGY CONVERSION LIPIDS',
+                  normal: 'END IR, DIABETIC BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                 },
-                tagNotProvided: {}
+                tagNotProvided: 'END: CLEAR SIGNS OF IR DIABETIC NO OX DMG YET RECOM LIPIDS'
               }
             },
             bilirubinNotProvided: {
               ggtProvided: {},
-              ggtNotProvided: { 'END HERE WITH: IR DIABETIC LIKELY OX DMG CONFIRM WITH BILI GGT' }
+              ggtNotProvided: 'END HERE WITH: IR DIABETIC LIKELY OX DMG CONFIRM WITH BILI GGT'
             }
           },
           preDiabetic: {
             bilirubinProvided: {
               ggtProvided: {
-                bothHigh: {'END HERE WITH: IR, PREDIABETIC, OX DAMAGE CRITICAL'},
+                bothHigh: 'END HERE WITH: IR, PREDIABETIC, OX DAMAGE CRITICAL',
                 oneHigh: {
                   tagProvided: {
-                    high: {'END HERE WITH: IR, PREDIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS'},
-                    normal: {'END HERE WITH: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'}
+                    high: 'END HERE WITH: IR, PREDIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                    normal: 'END HERE WITH: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                   },
-                  tagNotProvided: {'END: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'}
+                  tagNotProvided: 'END: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
                 },
                 neitherHigh: {
                   tagProvided: {
-                    high: {'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ'},
-                    normal: {'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'}
+                    high: 'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ',
+                    normal: 'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'
                   },
-                  tagNotProvided: {'END: CLEAR SIGNS OF IR PREDIABETIC NO OX DMG YET RECOM LIPIDS'}
+                  tagNotProvided: 'END: CLEAR SIGNS OF IR PREDIABETIC NO OX DMG YET RECOM LIPIDS'
                 }
               },
               ggtNotProvided: {
                 tagProvided: {
-                  high: {},
-                  normal: {}
+                  high: 'END HERE WITH: IR, PREDIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                  normal: 'END HERE WITH: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                 },
-                tagNotProvided: {}
+                tagNotProvided: 'END: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
               }
             },
             bilirubinNotProvided: {
               ggtProvided: {},
-              ggtNotProvided: { 'END HERE WITH: IR PREDIABETIC LIKELY OX DMG CONFIRM WITH BILI GGT'}
+              ggtNotProvided: 'END HERE WITH: IR PREDIABETIC LIKELY OX DMG CONFIRM WITH BILI GGT'
             }
           },
           slipping: {
             bilirubinProvided: {
               ggtProvided: {
-                bothHigh: {'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE MODERATE'},
+                bothHigh: 'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE MODERATE',
                 oneHigh: {
                   tagProvided: {
-                    high: {'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS'},
-                    normal: {'END HERE WITH: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'}
+                    high: 'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                    normal: 'END HERE WITH: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                   },
-                  tagNotProvided: {'END: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'}
+                  tagNotProvided: 'END: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
                 },
                 neitherHigh: {
                   tagProvided: {
-                    high: {'END: CLEAR SIGNS OF IR SLIPPING D, BUT NO LIPID OXIDATION DMG, SUGGEST FULL QUIZ'},
-                    normal: {'END: CLEAR SIGNS OF IR SLIPPING D, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'}
+                    high: 'END: CLEAR SIGNS OF IR SLIPPING D, BUT NO LIPID OXIDATION DMG, SUGGEST FULL QUIZ',
+                    normal: 'END: CLEAR SIGNS OF IR SLIPPING D, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'
                   },
-                  tagNotProvided: {'END: CLEAR SIGNS OF IR SLIPPING D NO OX DMG YET RECOM LIPIDS'}
+                  tagNotProvided: 'END: CLEAR SIGNS OF IR SLIPPING D NO OX DMG YET RECOM LIPIDS'
                 }
               },
               ggtNotProvided: {
                 tagProvided: {
-                  high: {},
-                  normal: {}
+                  high: 'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                  normal: 'END HERE WITH: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                 },
-                tagNotProvided: {}
+                tagNotProvided: 'END: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
               }
             },
             bilirubinNotProvided: {
               ggtProvided: {},
-              ggtNotProvided: { 'END HERE WITH: IR SLIPPING DIABETIC LIKELY OX DMG CONFIRM WITH BILI GGT'}
+              ggtNotProvided: 'END HERE WITH: IR SLIPPING DIABETIC LIKELY OX DMG CONFIRM WITH BILI GGT'
             }
           },
           notDiabetic: {
             bilirubinProvided: {
               ggtProvided: {
-                bothHigh: {'END HERE WITH: IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS'},
+                bothHigh: 'END HERE WITH: IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS',
                 oneHigh: {
                   tagProvided: {
-                    high: {'END HERE WITH: IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS'},
-                    normal: {'END HERE WITH: IR, NOT DIABETIC, NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'}
+                    high: 'END HERE WITH: IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS',
+                    normal: 'END HERE WITH: IR, NOT DIABETIC, NO EARLY SIGNS OF DMG NOT TOO LATE CHG'
                   },
-                  tagNotProvided: {'END: IR, NOT DIABETIC, NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'}
+                  tagNotProvided: 'END: IR, NOT DIABETIC, NO SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG RECOM LIPIDS'
                 },
                 neitherHigh: {
                   tagProvided: {
-                    high: {'END: IR, NOT DIABETIC, NO EARLY SIGNS OF DMG, BUT LIPID METABOLIC ISSUES FULL QUIZ'},
-                    normal: {'END IR NOT DIABETIC NO EARLY SIGNS OF DMG NO ISSUES WITH TAG RELATIVELY HEALTHY'}
+                    high: 'END: IR, NOT DIABETIC, NO EARLY SIGNS OF DMG, BUT LIPID METABOLIC ISSUES FULL QUIZ',
+                    normal: 'END IR NOT DIABETIC NO EARLY SIGNS OF DMG NO ISSUES WITH TAG RELATIVELY HEALTHY'
                   },
-                  tagNotProvided: {'END IR NOT DIABETIC NO EARLY SIGNS OF DMG RELATIVELY HEALTHY RECOM LIPIDS'}
+                  tagNotProvided: 'END IR NOT DIABETIC NO EARLY SIGNS OF DMG RELATIVELY HEALTHY RECOM LIPIDS'
                 }
               },
               ggtNotProvided: {
                 tagProvided: {
-                  high: {},
-                  normal: {}
+                  high: 'END HERE WITH: IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS',
+                  normal: 'END: IR, NOT DIABETIC, NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                 },
-                tagNotProvided: {}
+                tagNotProvided: 'END: IR, NOT DIABETIC, NO SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG RECOM LIPIDS'
               }
             },
             bilirubinNotProvided: {
               ggtProvided: {},
-              ggtNotProvided: { 'END HERE WITH: IR BUT NOT DIABETIC, LIKELY NO LONG OX DMG TEMPORARY IR'}
+              ggtNotProvided: 'END HERE WITH: IR BUT NOT DIABETIC, LIKELY NO LONG OX DMG TEMPORARY IR'
             }
           }
         },
         hba1cNotProvided: {
           bilirubinProvided: {
             ggtProvided: {
-              bothHigh: {'END HERE WITH: IR, OX DAMAGE LIPIDS RECOMMEND HBA1C'},
+              bothHigh: 'END HERE WITH: IR, OX DAMAGE LIPIDS RECOMMEND HBA1C',
               oneHigh: {
                 tagProvided: {
-                  high: {'END HERE WITH: IR, OX DAMAGE LIPIDS RECOMMEND HBA1C'},
-                  normal: {'END HERE WITH: IR, SLIGHT OX DMG RECOMMEND HBA1C'}
+                  high: 'END HERE WITH: IR, OX DAMAGE LIPIDS RECOMMEND HBA1C',
+                  normal: 'END HERE WITH: IR, SLIGHT OX DMG RECOMMEND HBA1C'
                 },
-                tagNotProvided: {'END HERE WITH: IR, SLIGHT OX DMG RECOMMEND HBA1C, LIPIDS'}
+                tagNotProvided: 'END HERE WITH: IR, SLIGHT OX DMG RECOMMEND HBA1C, LIPIDS'
               },
               neitherHigh: {
                 tagProvided: {
-                  high: {'END: IR, NO OX DAMAGE YET BUT ISSUES WITH LIPID METABOLISM, RECOM FULL QUIZ'},
-                  normal: {'END IR NO OX DAMAGE YET LIPID MET IS GOOD RELATIVELY HEALTHY BUT RECOM HBA1C'}
+                  high: 'END: IR, NO OX DAMAGE YET BUT ISSUES WITH LIPID METABOLISM, RECOM FULL QUIZ',
+                  normal: 'END IR NO OX DAMAGE YET LIPID MET IS GOOD RELATIVELY HEALTHY BUT RECOM HBA1C'
                 },
-                tagNotProvided: {'END: IR NO OX DAMAGE YET RELATIVELY HEALTHY BUT RECOM LIPID HBA1C'}
+                tagNotProvided: 'END: IR NO OX DAMAGE YET RELATIVELY HEALTHY BUT RECOM LIPID HBA1C'
               }
             },
             ggtNotProvided: {
               tagProvided: {
-                high: {},
-                normal: {}
+                high: 'END HERE WITH: IR, OX DAMAGE LIPIDS RECOMMEND HBA1C',
+                normal: 'END HERE WITH: IR, SLIGHT OX DMG RECOMMEND HBA1C'
               },
-              tagNotProvided: {}
+              tagNotProvided: 'END HERE WITH: IR, SLIGHT OX DMG RECOMMEND HBA1C, LIPIDS'
             }
           },
           bilirubinNotProvided: {
             ggtProvided: {},
-            ggtNotProvided: { 'END RESULT WITH IR BUT NEED MORE INSIGHT HBA1C GGT BILI'}
+            ggtNotProvided: 'END RESULT WITH IR BUT NEED MORE INSIGHT HBA1C GGT BILI'
           }
         }
       },
-      notIR: { 'END IT HERE WITH QUESTION' }
+      notIR: 'END IT HERE WITH QUESTION1'
     },
     insulinNotProvided: {
       hba1cProvided: {
         diabetic: {
           bilirubinProvided: {
             ggtProvided: {
-              bothHigh: { 'END HERE WITH: IR, DIABETIC, OX DAMAGE CRITICAL'},
+              bothHigh: 'END HERE WITH: IR, DIABETIC, OX DAMAGE CRITICAL',
               oneHigh: {
                 tagProvided: {
-                  high: {'END HERE WITH: IR, DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS'},
-                  normal: {'END HERE WITH: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'}
+                  high: 'END HERE WITH: IR, DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                  normal: 'END HERE WITH: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                 },
-                tagNotProvided: {'END: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'}
+                tagNotProvided: 'END: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
               },
               neitherHigh: {
                 tagProvided: {
-                  high: {'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ'},
-                  normal: {'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'}
+                  high: 'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ',
+                  normal: 'END: CLEAR SIGNS OF IR DIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'
                 },
-                tagNotProvided: {'END: CLEAR SIGNS OF IR DIABETIC NO OX DMG YET RECOM LIPIDS'}
+                tagNotProvided: 'END: CLEAR SIGNS OF IR DIABETIC NO OX DMG YET RECOM LIPIDS'
               }
             },
             ggtNotProvided: {
               tagProvided: {
-                high: {},
-                normal: {}
+                high: 'END HERE WITH: IR, DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                normal: 'END HERE WITH: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
               },
-              tagNotProvided: {}
+              tagNotProvided: 'END: IR, DIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
             }
           },
           bilirubinNotProvided: {
             ggtProvided: {},
-            ggtNotProvided: { 'END HERE WITH RESULT: IR AND DIABETIC BUT NEED MORE INSIGHT BILI GGT'}
+            ggtNotProvided: 'END HERE WITH RESULT: IR AND DIABETIC BUT NEED MORE INSIGHT BILI GGT'
           }
         },
         preDiabetic: {
           bilirubinProvided: {
             ggtProvided: {
-              bothHigh: { 'END HERE WITH: IR, PREDIABETIC, OX DAMAGE CRITICAL'},
+              bothHigh: 'END HERE WITH: IR, PREDIABETIC, OX DAMAGE CRITICAL',
               oneHigh: {
                 tagProvided: {
-                  high: {'END HERE WITH: IR, PREDIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS'},
-                  normal: {'END HERE WITH: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'}
+                  high: 'END HERE WITH: IR, PREDIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                  normal: 'END HERE WITH: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                 },
-                tagNotProvided: {'END: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'}
+                tagNotProvided: 'END: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
               },
               neitherHigh: {
                 tagProvided: {
-                  high: {'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ'},
-                  normal: {'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'}
+                  high: 'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ',
+                  normal: 'END: CLEAR SIGNS OF IR PREDIABETIC, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'
                 },
-                tagNotProvided: {'END: CLEAR SIGNS OF IR PREDIABETIC NO OX DMG YET RECOM LIPIDS'}
+                tagNotProvided: 'END: CLEAR SIGNS OF IR PREDIABETIC NO OX DMG YET RECOM LIPIDS'
               }
             },
             ggtNotProvided: {
               tagProvided: {
-                high: {},
-                normal: {}
+                high: 'END HERE WITH: IR, PREDIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                normal: 'END HERE WITH: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
               },
-              tagNotProvided: {}
+              tagNotProvided: 'END: IR, PREDIABETIC, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
             }
           },
           bilirubinNotProvided: {
             ggtProvided: {},
-            ggtNotProvided: { 'END HERE WITH RESULT: IR AND PREDIABETIC BUT NEED MORE INSIGHT BILI GGT'}
+            ggtNotProvided: 'END HERE WITH RESULT: IR AND PREDIABETIC BUT NEED MORE INSIGHT BILI GGT'
           }
         },
         slipping: {
           bilirubinProvided: {
             ggtProvided: {
-              bothHigh: {'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE MODERATE'},
+              bothHigh: 'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE MODERATE',
               oneHigh: {
                 tagProvided: {
-                  high: {'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS'},
-                  normal: {'END HERE WITH: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'}
+                  high: 'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                  normal: 'END HERE WITH: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
                 },
-                tagNotProvided: {'END: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'}
+                tagNotProvided: 'END: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
               },
               neitherHigh: {
                 tagProvided: {
-                  high: {'END: CLEAR SIGNS OF IR SLIPPING D, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ'},
-                  normal: {'END: CLEAR SIGNS OF IR SLIPPING, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'}
+                  high: 'END: CLEAR SIGNS OF IR SLIPPING D, BUT NO OXIDATION DMG, LIPID ISS SUGGEST FULL QUIZ',
+                  normal: 'END: CLEAR SIGNS OF IR SLIPPING, BUT NO OX DMG, GOOD TAG. TAKE FULL QUIZ'
                 },
-                tagNotProvided: {'END: CLEAR SIGNS OF IR SLIPPING D, NO OX DMG YET RECOM LIPIDS'}
+                tagNotProvided: 'END: CLEAR SIGNS OF IR SLIPPING D, NO OX DMG YET RECOM LIPIDS'
               }
             },
             ggtNotProvided: {
               tagProvided: {
-                high: {},
-                normal: {}
+                high: 'END HERE WITH: IR, SLIPPING DIABETIC, OX DAMAGE, ISS WITH ENERGY CONVERSION LIPIDS',
+                normal: 'END HERE WITH: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE LIFESTYLE CHG'
               },
-              tagNotProvided: {}
+              tagNotProvided: 'END: IR, SLIPPING D, BUT NO EARLY SIGNS OF DMG NOT TOO LATE RECOM LIPIDS'
             }
           },
           bilirubinNotProvided: {
             ggtProvided: {},
-            ggtNotProvided: { 'END HERE WITH RESULT: IR AND SLIPPING DIABETIC BUT NEED MORE INSIGHT BILI GGT'}
+            ggtNotProvided: 'END HERE WITH RESULT: IR AND SLIPPING DIABETIC BUT NEED MORE INSIGHT BILI GGT'
           }
         },
         notDiabetic: {
           bilirubinProvided: {
             ggtProvided: {
-              bothHigh: {'END HERE WITH: NOT IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS'},
+              bothHigh: 'END HERE WITH: NOT IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS',
               oneHigh: {
                 tagProvided: {
-                  high: {'END HERE WITH: NOT IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS'},
-                  normal: {'END HERE WITH: NOT IR, NOT DIABETIC, NO EARLY SIGNS OX'}
+                  high: 'END HERE WITH: NOT IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS',
+                  normal: 'END HERE WITH: NOT IR, NOT DIABETIC, NO EARLY SIGNS OX'
                 },
-                tagNotProvided: {'END HERE WITH: NOT IR, NOT DIABETIC, NO EARLY SIGNS OX RECOM LIPIDS'}
+                tagNotProvided: 'END HERE WITH: NOT IR, NOT DIABETIC, NO EARLY SIGNS OX RECOM LIPIDS'
               },
               neitherHigh: {
                 tagProvided: {
-                  high: {'END: NOT IR, NOT DIABETIC, NO EARLY SIGNS OF OX, BUT ISSUES W LIPID MET. FULL QUIZ'},
-                  normal: {'END NOT IR, NOT DIABETIC, NO EARLY SIGNS OF OX, GOOD LIPID MET, RELATIVELY HEALTHY'}
+                  high: 'END: NOT IR, NOT DIABETIC, NO EARLY SIGNS OF OX, BUT ISSUES W LIPID MET. FULL QUIZ',
+                  normal: 'END NOT IR, NOT DIABETIC, NO EARLY SIGNS OF OX, GOOD LIPID MET, RELATIVELY HEALTHY'
                 },
-                tagNotProvided: {'END NOT IR, NOT DIABETIC, NO EARLY SIGNS OF OX, GET LIPID IN CASE; HEALTHY'}
+                tagNotProvided: 'END NOT IR, NOT DIABETIC, NO EARLY SIGNS OF OX, GET LIPID IN CASE; HEALTHY'
               }
             },
             ggtNotProvided: {
               tagProvided: {
-                high: {},
-                normal: {}
+                high: 'END HERE WITH: NOT IR, NOT DIABETIC, BUT SOMETHING CAUSING OX STRESS',
+                normal: 'END HERE WITH: NOT IR, NOT DIABETIC, NO EARLY SIGNS OX'
               },
-              tagNotProvided: {}
+              tagNotProvided: 'END HERE WITH: NOT IR, NOT DIABETIC, NO EARLY SIGNS OX RECOM LIPIDS'
             }
           },
           bilirubinNotProvided: {
             ggtProvided: {},
-            ggtNotProvided: { 'END HERE WITH RESULT: GLU WAS HIGH BUT NOT DIABETIC, COULD BE NO FAST? INS RECOM'}
+            ggtNotProvided: 'END HERE WITH RESULT: GLU WAS HIGH BUT NOT DIABETIC, COULD BE NO FAST? INS RECOM'
           }
         }
       },
       hba1cNotProvided: {
         bilirubinProvided: {
           ggtProvided: {
-            bothHigh: {'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. OX STRESS FROM SOMETHING'},
+            bothHigh: 'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. OX STRESS FROM SOMETHING',
             oneHigh: {
               tagProvided: {
-                high: {'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. OX STRESS FROM SOMETHING'},
-                normal: {'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. NO EARLY SIGNS OX STRESS'}
+                high: 'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. OX STRESS FROM SOMETHING',
+                normal: 'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. NO EARLY SIGNS OX STRESS'
               },
-              tagNotProvided: {'END WITH RESULT: NEED MORE INSIGHT INS HBA1C LIPIDS. NO EARLY SIGNS OX STRESS'}
+              tagNotProvided: 'END WITH RESULT: NEED MORE INSIGHT INS HBA1C LIPIDS. NO EARLY SIGNS OX STRESS'
             },
             neitherHigh: {
               tagProvided: {
-                high: {'END: NEED MORE INSIGHT INS HBA1C - ISS W FAT METABOLISM TAKE FULL QUIZ'},
-                normal: {'END NEED MORE INSIGHT INS HBA1C, BUT OVERALL RELATIVELY HEALTHY GOOD LIPID MET'}
+                high: 'END: NEED MORE INSIGHT INS HBA1C - ISS W FAT METABOLISM TAKE FULL QUIZ',
+                normal: 'END NEED MORE INSIGHT INS HBA1C, BUT OVERALL RELATIVELY HEALTHY GOOD LIPID MET'
               },
-              tagNotProvided: {'END NEED MORE INSIGHT INS HBA1C LIPIDS TAKE FULL QUIZ'}
+              tagNotProvided: 'END NEED MORE INSIGHT INS HBA1C LIPIDS TAKE FULL QUIZ'
             }
           },
           ggtNotProvided: {
             tagProvided: {
-              high: {},
-              normal: {}
+              high: 'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. OX STRESS FROM SOMETHING',
+              normal: 'END WITH RESULT: NEED MORE INSIGHT INS HBA1C. NO EARLY SIGNS OX STRESS'
             },
-            tagNotProvided: {}
+            tagNotProvided: 'END WITH RESULT: NEED MORE INSIGHT INS HBA1C LIPIDS. NO EARLY SIGNS OX STRESS'
           }
         },
         bilirubinNotProvided: {
           ggtProvided: {},
-          ggtNotProvided: { 'END WITH RESULT: NEED MORE INSIGHT INS GGT BILI'}
+          ggtNotProvided: 'END WITH RESULT: NEED MORE INSIGHT INS GGT BILI'
         }
       }
     }

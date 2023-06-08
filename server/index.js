@@ -15,6 +15,8 @@ app.post('/quiz', controllers.submitQuiz);
 
 app.get('/results', controllers.getResults);
 
+app.post('/labs', controllers.evaluateLabs);
+
 const port = process.env.PORT;
 app.listen(port, ()=> {
   console.log(`Listening on http://localhost:${port}`)
